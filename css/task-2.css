@@ -1,0 +1,16 @@
+.gallery {
+  display: flex;
+  list-style-type: none;
+  flex-wrap: wrap;
+  gap: 48px 24px;
+}
+
+.gallery li {
+  cursor: pointer;
+}
+
+.gallery img {
+  display: flex;
+  width: 360px;
+  height: 300px;
+}
