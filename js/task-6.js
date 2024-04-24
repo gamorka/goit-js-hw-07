@@ -1,38 +1,35 @@
+const boxesContainer = document.getElementById('boxes');
+const createButton = document.querySelector('button[data-create]');
+const destroyButton = document.querySelector('button[data-destroy]');
+const inputNumber = document.querySelector('input[type="number"]');
 
-    function getRandomHexColor() {
-      return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
-    }
+const getRandomHexColor = () => {
+  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+};
 
-    function createBoxes(amount) {
-      const boxesContainer = document.getElementById('boxes');
-      boxesContainer.innerHTML = '';
+const createBoxes = amount => {
+  let boxesHTML = '';
+  let size = 30;
 
-      let size = 30;
-      for (let i = 0; i < amount; i++) {
-        const box = document.createElement('div');
-        box.style.width = `${size}px`;
-        box.style.height = `${size}px`;
-        box.style.backgroundColor = getRandomHexColor();
-        boxesContainer.appendChild(box);
-        size += 10;
-      }
-    }
+  for (let i = 0; i < amount; i++) {
+    boxesHTML += `<div style="width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}"></div>`;
+    size += 10;
+  }
 
-    function destroyBoxes() {
-      const boxesContainer = document.getElementById('boxes');
-      boxesContainer.innerHTML = ''; 
-    }
+  boxesContainer.innerHTML = boxesHTML;
+};
 
-    document.querySelector('[data-create]').addEventListener('click', () => {
-      const input = document.querySelector('input[type="number"]');
-      const amount = parseInt(input.value);
+const destroyBoxes = () => {
+  boxesContainer.innerHTML = '';
+};
 
-      if (amount >= 1 && amount <= 100) {
-        createBoxes(amount);
-        input.value = '';
-      } else {
-        alert('Please enter a number between 1 and 100.');
-      }
-    });
+createButton.addEventListener('click', () => {
+  const amount = parseInt(inputNumber.value);
 
-    document.querySelector('[data-destroy]').addEventListener('click', destroyBoxes);
+  if (amount >= 1 && amount <= 100) {
+    createBoxes(amount);
+    inputNumber.value = '';
+  }
+});
+
+destroyButton.addEventListener('click', destroyBoxes);
